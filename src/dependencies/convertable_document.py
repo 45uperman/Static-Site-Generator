@@ -16,7 +16,7 @@ class ConvertableDocument:
             if block.tag == BlockType.heading[1]:
                 if found_title is True:
                     raise ValueError(f"Provided markdown has more than one title:\n~~~~~~\n{self.markdown}\n~~~~~~")
-                title = block.to_html()
+                title = block.to_html().lstrip("<h1>").rstrip("</h1>")
                 found_title = True
         if found_title is False:
             raise ValueError(f"Provided markdown is missing a title:\n~~~~~~\n{self.markdown}\n~~~~~~~")
