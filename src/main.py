@@ -44,13 +44,23 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
     return
 
 def main():
-    # C:\Projects\Static Site Generator\
-    static = r"./static"
-    public = r"./public"
-    content = r"./content"
-    template = r"./template.html"
-    destination = r"./public/index.html"
-    shutil.rmtree(public)
+    dirname = lambda path: os.path.dirname(path)
+    main_dir = os.path.abspath(__file__)
+    src_dir = dirname(main_dir)
+    parent_dir = dirname(src_dir)
+    # In case the ./ syntax decides not to work
+    try:
+        static = "./static"
+        public = "./public"
+        content = "./content"
+        template = "./template.html"
+        shutil.rmtree(public)
+    except FileNotFoundError:
+        static = f"{parent_dir}\\static"
+        public = f"{parent_dir}\\public"
+        content = f"{parent_dir}\\content"
+        template = f"{parent_dir}\\template.html"
+        shutil.rmtree(public)
     os.mkdir(public)
     copy_dir_r(static, public)
     generate_pages_recursive(content, template, public)
