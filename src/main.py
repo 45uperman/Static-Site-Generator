@@ -42,7 +42,6 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
         print(f"Recursing with new content path: {new_content_path} and new dest path: {new_dest_path}")
         generate_pages_recursive(new_content_path, template_path, new_dest_path)
     return
-    
 
 def main():
     # C:\Projects\Static Site Generator\
